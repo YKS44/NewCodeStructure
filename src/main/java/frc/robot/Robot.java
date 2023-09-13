@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.Loops.Looper;
+import frc.robot.Mechanisms.CatzDrivetrain;
+import frc.robot.Mechanisms.CatzRobotTracker;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,13 +19,25 @@ public class Robot extends TimedRobot {
 
     private final MechanismManager mechanismManager = MechanismManager.getInstance();
 
+    private final CatzDrivetrain drivetrain = CatzDrivetrain.getInstance();
+    private final CatzRobotTracker robotTracker = CatzRobotTracker.getInstance();
+
     private final Looper enabledLooper = new Looper();
     private final Looper disabledLooper = new Looper();
 
     @Override
     public void robotInit()
     {
-        mechanismManager.setMechanisms(null);
+        mechanismManager.setMechanisms(
+            drivetrain,
+            robotTracker
+        );
+        
+        //Put mechanisms that needs to update debug smartdashboard outputs here
+        mechanismManager.setDebugMechanisms(
+            drivetrain,
+            robotTracker
+        );
 
         mechanismManager.registerEnabledLoops(enabledLooper);
         mechanismManager.registerDisabledLoops(disabledLooper);

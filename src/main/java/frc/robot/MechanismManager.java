@@ -15,6 +15,8 @@ public class MechanismManager implements ILooper{
     private List<Mechanism> allMechanisms;
     private List<Loop> loops = new ArrayList<>();
 
+    private List<Mechanism> debugMechanisms;
+
     public static MechanismManager getInstance()
     {
         if(Instance == null)
@@ -30,7 +32,11 @@ public class MechanismManager implements ILooper{
     public void setMechanisms(Mechanism... allMechanisms)
     {
         this.allMechanisms = Arrays.asList(allMechanisms);
+    }
 
+    public void setDebugMechanisms(Mechanism... debugMechanisms)
+    {
+        this.debugMechanisms = Arrays.asList(debugMechanisms);
     }
 
     public void smartDashboard()
@@ -40,12 +46,12 @@ public class MechanismManager implements ILooper{
 
     public void smartDashboard_DEBUG()
     {
-        allMechanisms.forEach(Mechanism::smartDashboard_DEBUG);
+        debugMechanisms.forEach(Mechanism::smartDashboard_DEBUG);
     }
 
     public void registerEnabledLoops(Looper enabledLooper)
     {
-        allMechanisms.forEach(m -> loops.add(m.sendControlLoop()));
+        allMechanisms.forEach(m -> loops.add(m.registerEnabledLoop()));
         enabledLooper.register(new EnabledLoop());
     }
 

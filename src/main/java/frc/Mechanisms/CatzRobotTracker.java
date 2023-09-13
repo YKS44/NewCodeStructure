@@ -2,27 +2,27 @@ package frc.robot.Mechanisms;
 
 import frc.robot.Loops.Loop;
 
-public class CatzDrivetrain extends Mechanism{
+public class CatzRobotTracker extends Mechanism{
 
-    private static CatzDrivetrain Instance;
+    private static CatzRobotTracker Instance = null;
 
-    public static CatzDrivetrain getInstance()
+    public static CatzRobotTracker getInstance()
     {
         if(Instance == null)
         {
-            Instance = new CatzDrivetrain();
+            Instance = new CatzRobotTracker();
         }
         return Instance;
     }
 
-    private CatzDrivetrain()
+    private CatzRobotTracker()
     {
 
     }
 
     @Override
-    public Loop sendControlLoop(){
-        return new Loop() {
+    public Loop registerEnabledLoop() {
+        return new Loop(){
 
             @Override
             public void onStart() {
@@ -41,7 +41,6 @@ public class CatzDrivetrain extends Mechanism{
                 // TODO Auto-generated method stub
                 
             }
-
         };
     }
 }

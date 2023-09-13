@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -83,20 +84,29 @@ public class CatzSwerveModule extends Mechanism{
         if(isOpenLoop)
         {
             periodicIO.driveControlMode = ControlMode.PercentOutput;
+            periodicIO.driveCommand = desiredState.speedMetersPerSecond / CatzConstants.DriveConstants.MAX_SPEED;
         }
         else
         {
             periodicIO.driveControlMode = ControlMode.Velocity;
+            periodicIO.driveCommand = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, CatzConstants.DriveConstants.DRVTRAIN_WHEEL_CIRCUMFERENCE, CatzConstants.DriveConstants.SDS_L2_GEAR_RATIO);
         }
-
-        periodicIO.driveCommand = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, CatzConstants.DriveConstants.DRVTRAIN_WHEEL_CIRCUMFERENCE, CatzConstants.DriveConstants.SDS_L2_GEAR_RATIO);
-
 
         // double targetAngle = (Math.abs(desiredState.speedMetersPerSecond) <= (CatzConstants.MAX_SPEED * 0.01)) ? getCurrentRotation().getDegrees() : desiredState.angle.getDegrees(); //Prevent rotating module if speed is less then 1%. Prevents Jittering.
 
         periodicIO.steerCommand = Math.max(-1.0, Math.min(1.0, - pid.calculate(periodicIO.currentAngleRotation, desiredState.angle.getDegrees())));
 
         // System.out.println(desiredState.angle.getDegrees() + " " + getCurrentRotation().getDegrees());
+    }
+
+    public SwerveModulePosition getModulePosition()
+    {
+        return new SwerveModulePosition(getDriveDistanceMeters(), Rotation2d.fromDegrees(periodicIO.currentAngleRotation));
+    }
+
+    public double getDriveDistanceMeters()
+    {
+        return periodicIO.currentDrivePosition / CatzConstants.DriveConstants.SDS_L2_GEAR_RATIO * CatzConstants.DriveConstants.DRVTRAIN_WHEEL_CIRCUMFERENCE / 2048.0;
     }
 
     @Override
@@ -114,6 +124,13 @@ public class CatzSwerveModule extends Mechanism{
         STEER_MOTOR.set(periodicIO.steerCommand);
     }
 
+    @Override
+    public void zeroSensors()
+    {
+        DRIVE_MOTOR.setSelectedSensorPosition(0.0);
+        periodicIO.currentDrivePosition = 0.0;
+    }
+
     private class PeriodicIO
     {
         public ControlMode driveControlMode; //ControlMode.Velocity is used for auton, ControlMode.PercentOutput is used for teleop.
@@ -123,6 +140,6 @@ public class CatzSwerveModule extends Mechanism{
 
         //Outputs
         public double steerCommand;
-        public double driveCommand;
+        public double driveCommand; //can be in PercentageOutput or Velocity
     }
 }

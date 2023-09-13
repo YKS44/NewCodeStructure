@@ -1,8 +1,7 @@
 package frc.robot.Mechanisms;
 
-import frc.robot.Loops.ILooper;
-//CREDIT: Team 1678
 import frc.robot.Loops.Loop;
+//CREDIT: Team 1678
 
 /**
  * The Subsystem abstract class, which serves as a basic framework for all robot subsystems. Each subsystem outputs
@@ -16,9 +15,6 @@ import frc.robot.Loops.Loop;
  */
 
 public abstract class Mechanism {
-
-    protected boolean TURN_ON_DEBUG = false;
-
     // Optional design pattern for caching periodic reads to avoid hammering the HAL/CAN.
     public void readPeriodicInputs(){} 
 
@@ -31,5 +27,5 @@ public abstract class Mechanism {
 
     public void smartDashboard_DEBUG(){}
 
-    public Loop sendControlLoop(){return null;}
+    public Loop registerEnabledLoop(){return null;}
 }
