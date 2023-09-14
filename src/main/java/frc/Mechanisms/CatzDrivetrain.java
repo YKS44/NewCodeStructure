@@ -1,10 +1,10 @@
-package frc.robot.Mechanisms;
+package frc.Mechanisms;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import frc.robot.Loops.Loop;
+import frc.Loops.Loop;
 
 public class CatzDrivetrain extends Mechanism{
 
@@ -59,12 +59,23 @@ public class CatzDrivetrain extends Mechanism{
         swerveModules[3] = RT_BACK_MODULE;
 
         navX = new AHRS();
-        navX.setAngleAdjustment(-navX.getYaw() + 180);
+    }
+
+    public void setSwerveModuleStates(SwerveModuleState[] states)
+    {
+
+    }
+
+    public void stopDriving()
+    {
+        
     }
 
     @Override
     public void readPeriodicInputs() 
     {
+        periodicIO.orientation = navX.getAngle();
+
         for(CatzSwerveModule swerveModule : swerveModules)
         {
             swerveModule.readPeriodicInputs();
@@ -108,6 +119,11 @@ public class CatzDrivetrain extends Mechanism{
             }
 
         };
+    }
+
+    public double getGyroAngle()
+    {
+        return periodicIO.orientation;
     }
 
     private class PeriodicIO

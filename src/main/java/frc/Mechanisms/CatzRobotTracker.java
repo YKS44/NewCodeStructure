@@ -1,6 +1,7 @@
-package frc.robot.Mechanisms;
+package frc.Mechanisms;
 
-import frc.robot.Loops.Loop;
+import edu.wpi.first.math.geometry.Pose2d;
+import frc.Loops.Loop;
 
 public class CatzRobotTracker extends Mechanism{
 
@@ -42,5 +43,10 @@ public class CatzRobotTracker extends Mechanism{
                 
             }
         };
+    }
+
+    public Pose2d getEstimatedPosition()
+    {
+        return new Pose2d();
     }
 }

@@ -5,9 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import frc.robot.Loops.Looper;
-import frc.robot.Mechanisms.CatzDrivetrain;
-import frc.robot.Mechanisms.CatzRobotTracker;
+import frc.Autonomous.AutonActionExecutor;
+import frc.Autonomous.AutonRoutineSelector;
+import frc.Loops.Looper;
+import frc.Mechanisms.CatzDrivetrain;
+import frc.Mechanisms.CatzRobotTracker;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,11 +19,17 @@ import frc.robot.Mechanisms.CatzRobotTracker;
  */
 public class Robot extends TimedRobot {
 
+    //Mechanisms
     private final MechanismManager mechanismManager = MechanismManager.getInstance();
 
     private final CatzDrivetrain drivetrain = CatzDrivetrain.getInstance();
     private final CatzRobotTracker robotTracker = CatzRobotTracker.getInstance();
 
+    //Autonomous
+    public static AutonActionExecutor autonExecutor = AutonActionExecutor.getInstance();
+    public static AutonRoutineSelector autonRoutineSelector = AutonRoutineSelector.getInstance();
+
+    //Loops
     private final Looper enabledLooper = new Looper();
     private final Looper disabledLooper = new Looper();
 

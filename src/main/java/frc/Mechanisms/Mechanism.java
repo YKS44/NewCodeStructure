@@ -1,6 +1,6 @@
-package frc.robot.Mechanisms;
+package frc.Mechanisms;
 
-import frc.robot.Loops.Loop;
+import frc.Loops.Loop;
 //CREDIT: Team 1678
 
 /**

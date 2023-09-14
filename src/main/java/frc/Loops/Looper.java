@@ -1,8 +1,8 @@
-package frc.robot.Loops;
+package frc.Loops;
 
 import edu.wpi.first.wpilibj.Notifier;
 
-public class Looper implements ILooper{
+public class Looper{
     private final double loopPeriod;
 
     private boolean running;
@@ -59,8 +59,7 @@ public class Looper implements ILooper{
         }
     }
 
-    @Override
-    public void register(Loop loop)
+    public void registerLoop(Loop loop)
     {
         this.loop = loop;
     }

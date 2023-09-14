@@ -1,4 +1,4 @@
-package frc.robot.Loops;
+package frc.Loops;
 
 public interface ILooper {
     void register(Loop loop);

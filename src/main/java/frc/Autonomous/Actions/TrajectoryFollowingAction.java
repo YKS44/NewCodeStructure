@@ -6,8 +6,8 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.Timer;
-import frc.Autonomous.CatzRobotTracker;
 import frc.Mechanisms.CatzDrivetrain;
+import frc.Mechanisms.CatzRobotTracker;
 import frc.robot.CatzConstants;
 
 // Follows a trajectory
@@ -50,7 +50,7 @@ public class TrajectoryFollowingAction implements ActionBase{
     // calculates if trajectory is finished
     @Override
     public boolean isFinished() {
-        return timer.hasElapsed(totalTime + EXTRA_TIME); //will only work if the code is configured correctly.
+        return timer.hasElapsed(totalTime + EXTRA_TIME); //will only work if the robot constants are configured correctly.
     }
 
     // sets swerve modules to their target states so that the robot will follow the trajectory

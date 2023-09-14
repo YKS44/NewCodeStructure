@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import frc.robot.Loops.ILooper;
-import frc.robot.Loops.Loop;
-import frc.robot.Loops.Looper;
-import frc.robot.Mechanisms.Mechanism;
+import frc.Loops.ILooper;
+import frc.Loops.Loop;
+import frc.Loops.Looper;
+import frc.Mechanisms.Mechanism;
 
 public class MechanismManager implements ILooper{
     private static MechanismManager Instance;
@@ -52,12 +52,12 @@ public class MechanismManager implements ILooper{
     public void registerEnabledLoops(Looper enabledLooper)
     {
         allMechanisms.forEach(m -> loops.add(m.registerEnabledLoop()));
-        enabledLooper.register(new EnabledLoop());
+        enabledLooper.registerLoop(new EnabledLoop());
     }
 
     public void registerDisabledLoops(Looper disabledLooper)
     {
-        disabledLooper.register(new DisabledLoop());
+        disabledLooper.registerLoop(new DisabledLoop());
     }
 
     private class EnabledLoop implements Loop

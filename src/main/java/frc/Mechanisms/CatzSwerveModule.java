@@ -1,6 +1,4 @@
-package frc.robot.Mechanisms;
-
-import javax.print.attribute.standard.MediaPrintableArea;
+package frc.Mechanisms;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -17,7 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.robot.CatzConstants;
-import frc.robot.Utils.Conversions;
+import frc.Utils.Conversions;
 
 public class CatzSwerveModule extends Mechanism{
     private final CANSparkMax STEER_MOTOR;
