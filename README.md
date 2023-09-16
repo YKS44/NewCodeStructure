@@ -34,7 +34,9 @@ The basic flow of mechanism is:
 All input and output values must be stored inside an instance of the PeriodicIO class (a private nested class within the mechanism class).
 
 <img width="399" alt="Screenshot 2023-09-15 at 10 26 19 PM" src="https://github.com/YKS44/NewCodeStructure/assets/79933420/36610211-50c0-4445-85ed-09c92c81b3d9">
+
 <img width="781" alt="Screenshot 2023-09-15 at 10 26 37 PM" src="https://github.com/YKS44/NewCodeStructure/assets/79933420/f1908a17-328f-4ce4-b8ad-5df71ae9bdd3">
+
 <img width="568" alt="Screenshot 2023-09-15 at 10 26 52 PM" src="https://github.com/YKS44/NewCodeStructure/assets/79933420/19ad0b4a-3312-454c-b1fc-e23ec50641d6">
 
 ### MechanismManager.java
